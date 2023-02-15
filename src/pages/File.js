@@ -7,7 +7,7 @@ const File = () => {
   const [isLoading, setIsloading] = useState(true);
 
   const { id } = useParams();
-  console.log(id);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,7 +18,7 @@ const File = () => {
         setCharater(response.data);
         setIsloading(false);
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
       }
     };
 
