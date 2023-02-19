@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import loading from "../assets/img/loading.gif";
+// COMPOSANT
+import Selecteur from "../composant/Selecteur";
+import Cookies from "js-cookie";
 
-const Character = ({ name, setName, limit, skip }) => {
-  const [data, setData] = useState({});
+const Character = () => {
   const [isLoading, setIsloading] = useState(true);
+  const [data, setData] = useState({});
+  const [limit, setLimit] = useState("");
+  const [skip, setSkip] = useState(0);
+  const [name, setName] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3002/characters?limit=${limit}&skip=${skip}&name=${name}`
+          `http://localhost:3002/character?limit=${limit}&skip=${skip}&name=${name}`
         );
 
         setData(response.data);
@@ -21,31 +30,97 @@ const Character = ({ name, setName, limit, skip }) => {
       }
     };
     fetchData();
-  }, [limit, skip, name]);
-  console.log(data.results);
+  }, [limit, skip, name, setData]);
+
+  const handleFavorite = async (event) => {
+    try {
+      const newfavorie = await axios.post(
+        "http://localhost:3002/favorite/add",
+        {
+          name: event.name,
+          description: event.description,
+          img: event.img,
+          token: Cookies.get("token-marvel"),
+        }
+      );
+      console.log(newfavorie);
+    } catch (error) {}
+  };
 
   return isLoading ? (
-    <p>En cours de chargement</p>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <img
+        src={loading}
+        alt=""
+        style={{
+          width: "100vh",
+        }}
+      />
+    </div>
+  ) : !Cookies.get("token-marvel") ? (
+    navigate("/signup")
   ) : (
     <div className="container">
-      {data.results.map((item) => {
-        console.log(item);
-        const id = item._id;
-        return (
-          <div key={item._id}>
-            <h4>{item.name}</h4>
-            <Link to={`/File/${id}`}>
-              <img
-                style={{ width: "200px" }}
-                src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
-                alt=""
-              />
-            </Link>
+      <Selecteur
+        tab={data.results}
+        setName={setName}
+        setSkip={setSkip}
+        skip={skip}
+        setLimit={setLimit}
+      />
+      <h1>PERSONNAGES</h1>
+      <div className="block">
+        {data.results.map((item) => {
+          const id = item._id;
+          return (
+            <div className="charactere morph" key={item._id}>
+              <Link to={`/character/${id}`}>
+                <img
+                  style={{
+                    width: "200px",
+                    height: "200px",
+                  }}
+                  src={`${item.thumbnail.path}.${item.thumbnail.extension}`}
+                  alt=""
+                />
+              </Link>
 
-            <p style={{ width: "200px" }}>{item.description}</p>
-          </div>
-        );
-      })}
+              <div
+                style={{
+                  backgroundColor: "black",
+                  padding: "20px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <h4 style={{ marginBottom: "30px", marginTop: "10px" }}>
+                  {item.name}
+                </h4>
+                <p style={{ width: "300px" }}>{item.description}</p>
+                <button
+                  onClick={() => {
+                    handleFavorite({
+                      img: `${item.thumbnail.path}.${item.thumbnail.extension}`,
+                      name: item.name,
+                      description: item.description,
+                    });
+                  }}
+                >
+                  Ajoutez a vos favoris
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };
