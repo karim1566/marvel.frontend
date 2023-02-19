@@ -49,7 +49,7 @@ const Home = () => {
       </p>
     </div>
   ) : (
-    navigate("/login")
+    navigate("/signup")
   );
 };
 

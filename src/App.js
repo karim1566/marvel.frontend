@@ -35,7 +35,7 @@ function App() {
       <Router>
         <Header token={token} setToken={setToken} handleToken={handleToken} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="" element={<Home />} />
           <Route
             path="/signup"
             element={<Signup handleToken={handleToken} />}
