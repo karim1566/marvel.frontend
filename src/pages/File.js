@@ -11,7 +11,9 @@ const File = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3002/comics/${id}`);
+        const response = await axios.get(
+          `https://site--marvel-backend--q5p6j62kpgtk.code.run/comics/${id}`
+        );
 
         setCharater(response.data);
         setIsloading(false);

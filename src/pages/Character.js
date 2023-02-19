@@ -19,7 +19,7 @@ const Character = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3002/character?limit=${limit}&skip=${skip}&name=${name}`
+          `https://site--marvel-backend--q5p6j62kpgtk.code.run/character?limit=${limit}&skip=${skip}&name=${name}`
         );
 
         setData(response.data);

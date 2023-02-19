@@ -8,26 +8,28 @@ const Favoris = () => {
   const [data, setData] = useState({});
   const [isLoading, setIsloading] = useState(true);
   const navigate = useNavigate();
-  const FetchData = async () => {
-    try {
-      if (!Cookies.get("token-marvel")) {
-        return navigate("/signup");
-      }
-
-      const response = await axios.post(
-        `http://localhost:3002/favoris/${Cookies.get("token-marvel")}`
-      );
-
-      setData(response.data);
-      setIsloading(false);
-    } catch (error) {
-      console.log(error.response);
-    }
-  };
 
   useEffect(() => {
+    const FetchData = async () => {
+      try {
+        if (!Cookies.get("token-marvel")) {
+          return navigate("/signup");
+        }
+
+        const response = await axios.post(
+          `https://site--marvel-backend--q5p6j62kpgtk.code.run/favoris/${Cookies.get(
+            "token-marvel"
+          )}`
+        );
+
+        setData(response.data);
+        setIsloading(false);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
     FetchData();
-  }, []);
+  }, [navigate]);
 
   return isLoading ? (
     <div

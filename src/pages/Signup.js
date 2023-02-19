@@ -15,12 +15,15 @@ const Signup = ({ handleToken }) => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:3002/signup", {
-        email: email,
-        username: username,
-        password: password,
-        newsletter: newsletter,
-      });
+      const response = await axios.post(
+        "https://site--marvel-backend--q5p6j62kpgtk.code.run/signup",
+        {
+          email: email,
+          username: username,
+          password: password,
+          newsletter: newsletter,
+        }
+      );
 
       if (response.data.token) {
         handleToken(response.data.token);
