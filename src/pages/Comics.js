@@ -91,7 +91,14 @@ const Comics = () => {
                   padding: "25px",
                 }}
               >
-                <h3 style={{ borderBottom: "grey solid 2px" }}>{item.title}</h3>
+                <h3
+                  style={{
+                    borderBottom: "grey solid 2px",
+                    animation: "apparition 0.8s ease-out",
+                  }}
+                >
+                  {item.title}
+                </h3>
                 <p style={{ fontSize: "17px" }}>{item.description}</p>
               </div>
             </div>

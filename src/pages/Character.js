@@ -12,6 +12,7 @@ const Character = () => {
   const [limit, setLimit] = useState("");
   const [skip, setSkip] = useState(0);
   const [name, setName] = useState("");
+  const [favoris, setFavoris] = useState();
 
   const navigate = useNavigate();
 
@@ -43,7 +44,7 @@ const Character = () => {
           token: Cookies.get("token-marvel"),
         }
       );
-      console.log(newfavorie);
+      setFavoris(newfavorie);
     } catch (error) {}
   };
 
@@ -101,11 +102,18 @@ const Character = () => {
                   alignItems: "center",
                 }}
               >
-                <h4 style={{ marginBottom: "30px", marginTop: "10px" }}>
+                <h4
+                  style={{
+                    marginBottom: "30px",
+                    marginTop: "10px",
+                    animation: "apparition 0.8s ease-out",
+                  }}
+                >
                   {item.name}
                 </h4>
                 <p style={{ width: "300px" }}>{item.description}</p>
                 <button
+                  className="selec"
                   onClick={() => {
                     handleFavorite({
                       img: `${item.thumbnail.path}.${item.thumbnail.extension}`,
