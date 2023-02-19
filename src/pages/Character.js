@@ -45,6 +45,7 @@ const Character = () => {
         }
       );
       setFavoris(newfavorie);
+      console.log(favoris);
     } catch (error) {}
   };
 
