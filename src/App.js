@@ -9,52 +9,44 @@ import Home from "./pages/Home";
 import Comics from "./pages/Comics";
 import Character from "./pages/Character";
 import File from "./pages/File";
+// import Comicsid from "./pages/Comicsid";
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import Favoris from "./pages/Favoris";
 
-// import axios from "axios";
-
-// const handleclick = async() => {
-
-//   const response= await axios.get("http://localhost:3002/",)
-// };
+import Cookies from "js-cookie";
 
 function App() {
   const [token, setToken] = useState();
-  const [title, setTitle] = useState("");
-  const [limit, setLimit] = useState("");
-  const [skip, setSkip] = useState("");
-  const [name, setName] = useState("");
+  // const [data, setData] = useState({});
+
+  const handleToken = (token) => {
+    if (token) {
+      setToken(token);
+      Cookies.set("token-marvel", token, { expires: 14 });
+    } else {
+      setToken(null);
+      Cookies.remove("token-marvel");
+    }
+  };
 
   return (
     <div>
       <Router>
-        <Header
-          token={token}
-          setToken={setToken}
-          title={title}
-          setTitle={setTitle}
-          limit={limit}
-          setLimit={setLimit}
-          skip={skip}
-          setSkip={setSkip}
-        />
+        <Header token={token} setToken={setToken} handleToken={handleToken} />
         <Routes>
-          <Route
-            path="/comics"
-            element={<Comics title={title} skip={skip} limit={limit} />}
-          />
           <Route path="/" element={<Home />} />
           <Route
-            path="/character"
-            element={
-              <Character
-                skip={skip}
-                limit={limit}
-                name={name}
-                setName={setName}
-              />
-            }
+            path="/signup"
+            element={<Signup handleToken={handleToken} />}
           />
-          <Route path="/File/:id" element={<File />} />
+          <Route path="/favoris" element={<Favoris />} />
+          <Route path="/login" element={<Login handleToken={handleToken} />} />
+          <Route path="/comics" element={<Comics />} />
+          {/* <Route path="/comics/:id/:image" element={<Comicsid />} /> */}
+
+          <Route path="/character" element={<Character />} />
+          <Route path="/character/:id" element={<File token={token} />} />
         </Routes>
       </Router>
     </div>

@@ -1,34 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&family=Roboto:wght@500&display=swap");
+
 .container {
   width: 1240px;
   margin: 0 auto;
 }
-button {
+div div div div button {
+  padding: 10px;
+}
+header button {
   font-size: 30px;
   color: white;
-  background-color: #3163b3;
-  border: 3px solid red;
-  border-radius: 10px;
+  background-color: #ee181e;
+  border-radius: 30px;
   width: 240px;
   height: 50px;
 }
+button:hover {
+  color: #538ab9;
+  cursor: pointer;
+}
 h1 {
+  margin: 50px;
   font-size: 60px;
-  background-color: red;
+  background-color: transparent;
+  background-size: contain;
   color: white;
   padding: 10px;
-  border-radius: 10px;
+  text-align: center;
+  border-radius: 30px;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
+  animation: apparition 0.8s ease-out;
+}
+p {
+  animation: apparition 0.8s ease-out;
+}
+@keyframes apparition {
+  from {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+h4 {
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  margin-bottom: 20px;
+  border-radius: 30px;
+  border-bottom: 1px solid white;
+  border-top: 1px solid white;
 }
 h3 {
-  font-size: 30px;
+  font-size: 40px;
+}
+
+body {
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+}
+input {
+  width: 300px;
+  height: 30px;
+  border-radius: 30px;
 }
 /* -----------------------------------------------------
 
 -------------------------------------------------------
 HEADER*/
 header {
-  background-color: #3163b3;
+  background-color: #ee181e;
   padding: 10px;
   margin-bottom: 40px;
+  font-family: "Roboto", sans-serif;
 }
 .displayraw {
   padding-top: 30px;
@@ -47,4 +94,159 @@ header {
   align-items: center;
   flex-direction: column;
   gap: 30px;
+}
+/* ---------------------------------------------------
+-------------------------------------------------------
+CHARACTERE */
+.charactere {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  background-color: #ee181e;
+  color: white;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: 10px solid black;
+}
+.block {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 0px;
+  background-color: white;
+  /* border-radius: 10px; */
+}
+.morph img {
+  width: 200px;
+  height: 150px;
+  -webkit-filter: grayscale(0) blur(0px);
+  filter: grayscale(0) blur(0px);
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.morph :hover img {
+  width: 150px; /* on affiche l'image au carré */
+  height: 150px;
+  border-radius: 50%; /* on arrondit l'image */
+  -webkit-transform: rotate(360deg); /* rotation de l'image */
+  transform: rotate(360deg);
+}
+/* -------------------------------------------------------
+
+-----------------------------------
+FIL*/
+
+.file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+  background-color: black;
+}
+.menu {
+  display: flex;
+  padding: 10px;
+}
+/* ------------------------------------------------
+------------------------------------------------------
+FORMULAIRE */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  background-image: url(./assets/img/heros.webp);
+  /* background-size: cover; */
+  justify-content: center;
+  color: white;
+  gap: 20px;
+  width: 1200px;
+  height: 700px;
+  border-radius: 10px;
+  padding: 10px;
+}
+.tform {
+  background-color: transparent;
+  font-size: 60px;
+}
+span {
+  color: white;
+}
+span :hover {
+  color: #ee181e;
+  cursor: pointer;
+}
+/* -------------------------------------------------------------
+-----------------------------------------------------------------
+seleceteur */
+
+.selec {
+  border: none;
+  font-size: 14px;
+  color: white;
+  background-color: #ee181e;
+  border-radius: 30px;
+  margin: 10px;
+  padding: 10px;
+}
+.connect {
+  background-color: black;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+.action {
+  background-color: transparent;
+  border: none;
+  text-decoration: underline;
+  font-size: 20px;
+}
+input {
+  padding-left: 10px;
+}
+.nogood {
+  border: none;
+  font-size: 14px;
+  color: white;
+  background-color: #ee181e;
+  border-radius: 30px;
+  margin: 10px;
+  padding: 10px;
+  animation: nope 0.4s forwards;
+}
+@keyframes nope {
+  0% {
+    transform: translateX(10px);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  60% {
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.fav {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 10px;
+  border: 10px solid white;
+  padding: 10px;
 }

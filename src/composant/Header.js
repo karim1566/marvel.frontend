@@ -1,16 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/img/logo.png";
+import Cookies from "js-cookie";
 
-const Header = ({
-  title,
-  setTitle,
-  limit,
-  setlimit,
-  skip,
-  setSkip,
-  token,
-  setToken,
-}) => {
+const Header = ({ token, handleToken }) => {
+  const navigate = useNavigate();
   return (
     <header>
       <nav className="container displayraw">
@@ -27,6 +20,29 @@ const Header = ({
           <button>Favoris</button>
         </Link>
       </nav>
+      {Cookies.get("token-marvel") ? (
+        <div className="connect container">
+          <button
+            className="action"
+            onClick={() => {
+              handleToken(null);
+              navigate("/signup");
+            }}
+          >
+            Se deconnecter
+          </button>
+        </div>
+      ) : (
+        <div className="connect container">
+          <Link to="/signup" className="margin">
+            <button className="action">S'inscrire</button>
+          </Link>
+          <span>||</span>
+          <Link to="/login">
+            <button className="action">Se connecter</button>
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
