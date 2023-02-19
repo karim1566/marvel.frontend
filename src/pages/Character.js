@@ -35,7 +35,7 @@ const Character = () => {
   const handleFavorite = async (event) => {
     try {
       const newfavorie = await axios.post(
-        "http://localhost:3002/favorite/add",
+        "https://site--marvel-backend--q5p6j62kpgtk.code.run/favorite/add",
         {
           name: event.name,
           description: event.description,

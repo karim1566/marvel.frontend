@@ -26,7 +26,7 @@ const Comics = () => {
     };
     fetchData();
   }, [limit, skip, title, setData]);
-  console.log(data);
+
   return isLoading ? (
     <div
       style={{
